@@ -1,8 +1,9 @@
-const Gameboard = () => {
+const GameBoard = () => {
   const board = [];
-  let cell = 1;
+  const shipPlacements = {};
 
   function createGameBoard() {
+    let cell = 1;
     for (let i = 0; i < 10; i++) {
       board[i] = [];
 
@@ -16,8 +17,14 @@ const Gameboard = () => {
   createGameBoard();
 
   const getBoard = () => board;
+  const getBoardCell = (index) => board[index[0]][index[1]];
+  const getShipPlacements = () => shipPlacements;
 
-  return { getBoard };
+  const updateShipPlacements = (shipType, coardinates, cellsTaken) => {
+    shipPlacements[shipType] = { coardinates, cellsTaken };
+  };
+
+  return { getBoard, getBoardCell, getShipPlacements, updateShipPlacements };
 };
 
-export default Gameboard;
+export default GameBoard;
