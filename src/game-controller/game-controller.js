@@ -10,11 +10,20 @@ const GameController = () => {
     const coardinates = [];
     const cellsTaken = [];
 
-    for (let i = 0; i < shipLength; i++) {
-      coardinates.push([startPosition[0], startPosition[1] + i]);
-      cellsTaken.push(
-        gameBoard.getBoardCell([startPosition[0], startPosition[1] + i]),
-      );
+    if (
+      startPosition[0] >= 0 &&
+      startPosition[0] <= 9 &&
+      startPosition[1] >= 0 &&
+      startPosition[1] + (shipLength - 1) <= 9
+    ) {
+      for (let i = 0; i < shipLength; i++) {
+        coardinates.push([startPosition[0], startPosition[1] + i]);
+        cellsTaken.push(
+          gameBoard.getBoardCell([startPosition[0], startPosition[1] + i]),
+        );
+      }
+    } else {
+      return null;
     }
 
     return { coardinates, cellsTaken };
@@ -23,11 +32,13 @@ const GameController = () => {
   const placeShips = (shipType, startPosition) => {
     const position = calculatePosition(shipType, startPosition);
 
-    gameBoard.updateShipPlacements(
-      shipType,
-      position.coardinates,
-      position.cellsTaken,
-    );
+    if (position) {
+      gameBoard.updateShipPlacements(
+        shipType,
+        position.coardinates,
+        position.cellsTaken,
+      );
+    }
   };
 
   return { gameBoard, placeShips };
