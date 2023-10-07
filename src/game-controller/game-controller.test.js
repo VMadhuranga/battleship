@@ -21,6 +21,11 @@ test("Should update shipPlacement object with property ship type and value ship 
 
 // test("Ship coardinates length should equal to ship's length");
 
-// test("Should not place ships outside of game board");
+test("Should not update shipsPlacement object if ship is outside of game board", () => {
+  controller.placeShips("battleship", [0, 9]);
+  expect(
+    Object.hasOwn(controller.gameBoard.getShipPlacements(), "battleship"),
+  ).toBeFalsy();
+});
 
 // test("Should not place ships on top of each other");
