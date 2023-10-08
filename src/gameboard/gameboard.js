@@ -24,7 +24,20 @@ const GameBoard = () => {
     shipPlacements[shipType] = { coardinates, cellsTaken };
   };
 
-  return { getBoard, getBoardCell, getShipPlacements, updateShipPlacements };
+  const checkAvailbleShipPlacements = (cellsNeeded) =>
+    !Object.keys(shipPlacements).some((key) =>
+      shipPlacements[key].cellsTaken.some((taken) =>
+        cellsNeeded.includes(taken),
+      ),
+    );
+
+  return {
+    getBoard,
+    getBoardCell,
+    getShipPlacements,
+    updateShipPlacements,
+    checkAvailbleShipPlacements,
+  };
 };
 
 export default GameBoard;
