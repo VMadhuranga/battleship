@@ -19,23 +19,32 @@ const GameController = () => {
     return { coardinates, cellsTaken };
   };
 
+  const isInsideTheGameBoard = (shipLength, startPosition) =>
+    startPosition[0] >= 0 &&
+    startPosition[0] <= 9 &&
+    startPosition[1] >= 0 &&
+    startPosition[1] + (shipLength - 1) <= 9;
+
   const placeShips = (shipType, startPosition) => {
     const shipLength = ships[shipType].getShipLength();
+    const position = calculatePosition(shipLength, startPosition);
 
     if (
-      startPosition[0] >= 0 &&
-      startPosition[0] <= 9 &&
-      startPosition[1] >= 0 &&
-      startPosition[1] + (shipLength - 1) <= 9
+      isInsideTheGameBoard(shipLength, startPosition) &&
+      gameBoard.checkAvailbleShipPlacements(position.cellsTaken)
     ) {
-      const position = calculatePosition(shipLength, startPosition);
-
       gameBoard.updateShipPlacements(
         shipType,
         position.coardinates,
         position.cellsTaken,
       );
+    } else if (!gameBoard.checkAvailbleShipPlacements(position.cellsTaken)) {
+      return "Cannot place ship space already acquired";
+    } else if (!isInsideTheGameBoard(shipLength, startPosition)) {
+      return "Cannot place ship outside of game board";
     }
+
+    return "Ship placed successfully";
   };
 
   return { gameBoard, placeShips };
