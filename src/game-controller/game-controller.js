@@ -5,10 +5,22 @@ const GameController = () => {
   const ships = ShipTypes();
   const gameBoard = GameBoard();
 
-  const calculatePosition = (shipType, startPosition) => {
-    const shipLength = ships[shipType].getShipLength();
+  const calculatePosition = (shipLength, startPosition) => {
     const coardinates = [];
     const cellsTaken = [];
+
+    for (let i = 0; i < shipLength; i++) {
+      coardinates.push([startPosition[0], startPosition[1] + i]);
+      cellsTaken.push(
+        gameBoard.getBoardCell([startPosition[0], startPosition[1] + i]),
+      );
+    }
+
+    return { coardinates, cellsTaken };
+  };
+
+  const placeShips = (shipType, startPosition) => {
+    const shipLength = ships[shipType].getShipLength();
 
     if (
       startPosition[0] >= 0 &&
@@ -16,23 +28,8 @@ const GameController = () => {
       startPosition[1] >= 0 &&
       startPosition[1] + (shipLength - 1) <= 9
     ) {
-      for (let i = 0; i < shipLength; i++) {
-        coardinates.push([startPosition[0], startPosition[1] + i]);
-        cellsTaken.push(
-          gameBoard.getBoardCell([startPosition[0], startPosition[1] + i]),
-        );
-      }
-    } else {
-      return null;
-    }
+      const position = calculatePosition(shipLength, startPosition);
 
-    return { coardinates, cellsTaken };
-  };
-
-  const placeShips = (shipType, startPosition) => {
-    const position = calculatePosition(shipType, startPosition);
-
-    if (position) {
       gameBoard.updateShipPlacements(
         shipType,
         position.coardinates,
