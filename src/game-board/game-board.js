@@ -17,7 +17,7 @@ const GameBoard = () => {
   createGameBoard();
 
   const getBoard = () => board;
-  const getBoardCell = (index) => board[index[0]][index[1]];
+  const getBoardCell = (index) => board?.[index[0]]?.[index[1]];
   const getShipPlacements = () => shipPlacements;
 
   const updateShipPlacements = (shipType, coordinates, cellsTaken) => {
