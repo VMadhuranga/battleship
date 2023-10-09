@@ -20,11 +20,11 @@ const GameBoard = () => {
   const getBoardCell = (index) => board[index[0]][index[1]];
   const getShipPlacements = () => shipPlacements;
 
-  const updateShipPlacements = (shipType, coardinates, cellsTaken) => {
-    shipPlacements[shipType] = { coardinates, cellsTaken };
+  const updateShipPlacements = (shipType, coordinates, cellsTaken) => {
+    shipPlacements[shipType] = { coordinates, cellsTaken };
   };
 
-  const checkAvailbleShipPlacements = (cellsNeeded) =>
+  const checkAvailableShipPlacements = (cellsNeeded) =>
     !Object.keys(shipPlacements).some((key) =>
       shipPlacements[key].cellsTaken.some((taken) =>
         cellsNeeded.includes(taken),
@@ -36,7 +36,7 @@ const GameBoard = () => {
     getBoardCell,
     getShipPlacements,
     updateShipPlacements,
-    checkAvailbleShipPlacements,
+    checkAvailableShipPlacements,
   };
 };
 
