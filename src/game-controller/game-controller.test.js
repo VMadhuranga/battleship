@@ -2,6 +2,16 @@ import GameController from "./game-controller";
 
 const controller = GameController();
 
+test("Should return a message for successful ship placement", () => {
+  expect(controller.placeShips("carrier", [0, 0])).toBe(
+    "Ship placed successfully",
+  );
+
+  expect(controller.placeShips("patrolBoat", [9, 0])).toBe(
+    "Ship placed successfully",
+  );
+});
+
 test("Should update shipPlacement object with property ship type and value ship coordinates", () => {
   controller.placeShips("carrier", [0, 0]);
   controller.placeShips("patrolBoat", [9, 0]);
@@ -27,7 +37,7 @@ test("Should update shipPlacement object with property ship type and value ship 
   });
 });
 
-test("Should not place ships from outside of game board", () => {
+test("Should not place ships from outside of the game board. if so return a message indicating that", () => {
   expect(controller.placeShips("battleship", [0, 9])).toBe(
     "Cannot place ship outside of game board",
   );
@@ -57,7 +67,7 @@ test("Should not update shipsPlacement object if ship is outside of game board",
   ).toBeFalsy();
 });
 
-test("Should not place ships on top of each other", () => {
+test("Should not place ships on already acquired space. if so return a message indicating that", () => {
   expect(controller.placeShips("destroyer", [0, 1])).toBe(
     "Cannot place ship space already acquired",
   );
