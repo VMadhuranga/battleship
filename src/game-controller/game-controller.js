@@ -1,22 +1,22 @@
 import ShipTypes from "../ships/ships";
-import GameBoard from "../gameboard/gameboard";
+import GameBoard from "../game-board/game-board";
 
 const GameController = () => {
   const ships = ShipTypes();
   const gameBoard = GameBoard();
 
   const calculatePosition = (shipLength, startPosition) => {
-    const coardinates = [];
+    const coordinates = [];
     const cellsTaken = [];
 
     for (let i = 0; i < shipLength; i++) {
-      coardinates.push([startPosition[0], startPosition[1] + i]);
+      coordinates.push([startPosition[0], startPosition[1] + i]);
       cellsTaken.push(
         gameBoard.getBoardCell([startPosition[0], startPosition[1] + i]),
       );
     }
 
-    return { coardinates, cellsTaken };
+    return { coordinates, cellsTaken };
   };
 
   const isInsideTheGameBoard = (shipLength, startPosition) =>
@@ -31,14 +31,14 @@ const GameController = () => {
 
     if (
       isInsideTheGameBoard(shipLength, startPosition) &&
-      gameBoard.checkAvailbleShipPlacements(position.cellsTaken)
+      gameBoard.checkAvailableShipPlacements(position.cellsTaken)
     ) {
       gameBoard.updateShipPlacements(
         shipType,
-        position.coardinates,
+        position.coordinates,
         position.cellsTaken,
       );
-    } else if (!gameBoard.checkAvailbleShipPlacements(position.cellsTaken)) {
+    } else if (!gameBoard.checkAvailableShipPlacements(position.cellsTaken)) {
       return "Cannot place ship space already acquired";
     } else if (!isInsideTheGameBoard(shipLength, startPosition)) {
       return "Cannot place ship outside of game board";
