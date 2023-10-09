@@ -2,12 +2,12 @@ import GameController from "./game-controller";
 
 const controller = GameController();
 
-test("Should update shipPlacement object with property ship type and value ship coardinates", () => {
+test("Should update shipPlacement object with property ship type and value ship coordinates", () => {
   controller.placeShips("carrier", [0, 0]);
 
   expect(controller.gameBoard.getShipPlacements()).toEqual({
     carrier: {
-      coardinates: [
+      coordinates: [
         [0, 0],
         [0, 1],
         [0, 2],
@@ -19,7 +19,7 @@ test("Should update shipPlacement object with property ship type and value ship 
   });
 });
 
-// test("Ship coardinates length should equal to ship's length");
+// test("Ship coordinates length should equal to ship's length");
 
 test("Should not update shipsPlacement object if ship is outside of game board", () => {
   controller.placeShips("battleship", [0, 9]);
