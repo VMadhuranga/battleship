@@ -89,3 +89,28 @@ test("Should not update shipsPlacement object if space already acquired", () => 
     Object.hasOwn(controller.gameBoard.getShipPlacements(), "submarine"),
   ).toBeFalsy();
 });
+
+// test("Check if all ships are placed");
+test("if received attack is missed update missed attacks object", () => {
+  controller.receiveAttack([2, 0]);
+
+  expect(controller.gameBoard.getMissedAttacks().values()).toContainEqual([
+    2, 0,
+  ]);
+});
+
+test("if received attack is hit update hit attacks object", () => {
+  controller.receiveAttack([0, 1]);
+
+  expect(controller.gameBoard.getHitAttacks().values()).toContainEqual([0, 1]);
+});
+
+test("if received attack is hit update ship hit count", () => {
+  const ship = controller.gameBoard.checkShipAttacked([0, 1]);
+  const previousShipCount = controller.ships[ship].getShipHitCount();
+
+  controller.receiveAttack([0, 1]);
+  const currentShipCount = controller.ships[ship].getShipHitCount();
+
+  expect(previousShipCount).toBe(currentShipCount - 1);
+});
