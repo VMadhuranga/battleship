@@ -1,6 +1,8 @@
 const GameBoard = () => {
   const board = [];
   const shipPlacements = {};
+  const hitAttacks = new Map();
+  const missedAttacks = new Map();
 
   function createGameBoard() {
     let cell = 1;
@@ -31,12 +33,33 @@ const GameBoard = () => {
       ),
     );
 
+  const checkShipAttacked = (coordinates) =>
+    Object.keys(shipPlacements).find((key) =>
+      shipPlacements[key].cellsTaken.includes(getBoardCell(coordinates)),
+    );
+
+  const updateMissedAttacks = (coordinates) => {
+    missedAttacks.set(getBoardCell(coordinates), coordinates);
+  };
+
+  const getMissedAttacks = () => missedAttacks;
+  const getHitAttacks = () => hitAttacks;
+
+  const updateHitAttacks = (coordinates) => {
+    hitAttacks.set(getBoardCell(coordinates), coordinates);
+  };
+
   return {
     getBoard,
     getBoardCell,
     getShipPlacements,
     updateShipPlacements,
     checkAvailableShipPlacements,
+    checkShipAttacked,
+    updateMissedAttacks,
+    updateHitAttacks,
+    getMissedAttacks,
+    getHitAttacks,
   };
 };
 
