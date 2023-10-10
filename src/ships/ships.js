@@ -4,6 +4,7 @@ const Ship = (length) => {
   let hitCount = 0;
 
   const getShipLength = () => shipLength;
+  const getShipHitCount = () => hitCount;
 
   const isSunk = () => {
     if (hitCount === this.shipLength) {
@@ -19,6 +20,7 @@ const Ship = (length) => {
 
   return {
     getShipLength,
+    getShipHitCount,
     hit,
     isSunk,
   };
