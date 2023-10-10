@@ -47,7 +47,18 @@ const GameController = () => {
     return "Ship placed successfully";
   };
 
-  return { gameBoard, placeShips };
+  const receiveAttack = (coordinates) => {
+    const shipAttacked = gameBoard.checkShipAttacked(coordinates);
+
+    if (shipAttacked) {
+      ships[shipAttacked].hit();
+      gameBoard.updateHitAttacks(coordinates);
+    } else {
+      gameBoard.updateMissedAttacks(coordinates);
+    }
+  };
+
+  return { ships, gameBoard, placeShips, receiveAttack };
 };
 
 export default GameController;
