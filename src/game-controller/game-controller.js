@@ -58,7 +58,10 @@ const GameController = () => {
     }
   };
 
-  return { ships, gameBoard, placeShips, receiveAttack };
+  const checkAllShipsSunk = () =>
+    Object.keys(ships).every((key) => ships[key].isSunk());
+
+  return { ships, gameBoard, placeShips, receiveAttack, checkAllShipsSunk };
 };
 
 export default GameController;
