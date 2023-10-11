@@ -114,3 +114,13 @@ test("if received attack is hit update ship hit count", () => {
 
   expect(previousShipCount).toBe(currentShipCount - 1);
 });
+
+test("Report whether or not all of their ships have been sunk.", () => {
+  const isAllShipsSunk = controller.checkAllShipsSunk();
+
+  if (isAllShipsSunk) {
+    expect(isAllShipsSunk).toBe(true);
+  } else {
+    expect(isAllShipsSunk).toBe(false);
+  }
+});
