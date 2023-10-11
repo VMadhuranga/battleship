@@ -16,7 +16,7 @@ test("Should update shipPlacement object with property ship type and value ship 
   controller.placeShips("carrier", [0, 0]);
   controller.placeShips("patrolBoat", [9, 0]);
 
-  expect(controller.gameBoard.getShipPlacements()).toEqual({
+  expect(controller.getShipPlacements()).toEqual({
     carrier: {
       coordinates: [
         [0, 0],
@@ -55,15 +55,15 @@ test("Should not update shipsPlacement object if ship is outside of game board",
   controller.placeShips("submarine", [2, 10]);
 
   expect(
-    Object.hasOwn(controller.gameBoard.getShipPlacements(), "battleship"),
+    Object.hasOwn(controller.getShipPlacements(), "battleship"),
   ).toBeFalsy();
 
   expect(
-    Object.hasOwn(controller.gameBoard.getShipPlacements(), "destroyer"),
+    Object.hasOwn(controller.getShipPlacements(), "destroyer"),
   ).toBeFalsy();
 
   expect(
-    Object.hasOwn(controller.gameBoard.getShipPlacements(), "submarine"),
+    Object.hasOwn(controller.getShipPlacements(), "submarine"),
   ).toBeFalsy();
 });
 
@@ -82,31 +82,28 @@ test("Should not update shipsPlacement object if space already acquired", () => 
   controller.placeShips("submarine", [9, 1]);
 
   expect(
-    Object.hasOwn(controller.gameBoard.getShipPlacements(), "destroyer"),
+    Object.hasOwn(controller.getShipPlacements(), "destroyer"),
   ).toBeFalsy();
 
   expect(
-    Object.hasOwn(controller.gameBoard.getShipPlacements(), "submarine"),
+    Object.hasOwn(controller.getShipPlacements(), "submarine"),
   ).toBeFalsy();
 });
 
-// test("Check if all ships are placed");
 test("if received attack is missed update missed attacks object", () => {
   controller.receiveAttack([2, 0]);
 
-  expect(controller.gameBoard.getMissedAttacks().values()).toContainEqual([
-    2, 0,
-  ]);
+  expect(controller.getMissedAttacks().values()).toContainEqual([2, 0]);
 });
 
 test("if received attack is hit update hit attacks object", () => {
   controller.receiveAttack([0, 1]);
 
-  expect(controller.gameBoard.getHitAttacks().values()).toContainEqual([0, 1]);
+  expect(controller.getHitAttacks().values()).toContainEqual([0, 1]);
 });
 
 test("if received attack is hit update ship hit count", () => {
-  const ship = controller.gameBoard.checkShipAttacked([0, 1]);
+  const ship = controller.checkShipAttacked([0, 1]);
   const previousShipCount = controller.ships[ship].getShipHitCount();
 
   controller.receiveAttack([0, 1]);
