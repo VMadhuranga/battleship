@@ -7,7 +7,7 @@ const Ship = (length) => {
   const getShipHitCount = () => hitCount;
 
   const isSunk = () => {
-    if (hitCount === this.shipLength) {
+    if (hitCount === shipLength) {
       sunken = true;
     }
 
