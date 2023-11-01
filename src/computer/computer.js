@@ -38,4 +38,6 @@ const Computer = () => {
   return { controller, placeShipsRandomly, attackShip };
 };
 
+export const computer = Computer();
+
 export default Computer;
