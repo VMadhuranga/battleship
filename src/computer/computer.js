@@ -1,4 +1,5 @@
 import GameController from "../game-controller/game-controller";
+import player from "../player/player";
 
 const Computer = () => {
   const controller = GameController();
@@ -19,7 +20,22 @@ const Computer = () => {
     }
   };
 
-  return { controller, placeShipsRandomly };
+  const attackShip = () => {
+    let randomPlace = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+
+    while (
+      player.controller.getMissedAttacks().has(randomPlace) ||
+      player.controller.getHitAttacks().has(randomPlace)
+    ) {
+      randomPlace = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    }
+
+    player.controller.receiveAttack(
+      player.controller.gameBoard.getBoardCellCoordinates(randomPlace),
+    );
+  };
+
+  return { controller, placeShipsRandomly, attackShip };
 };
 
 export default Computer;
