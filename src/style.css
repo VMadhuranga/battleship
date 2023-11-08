@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: darkslategrey;
+  color: lightgray;
+}
+
+header {
+  font-size: 1.7rem;
+  text-align: center;
+  margin: 20px;
+}
+
+.message-board {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 20px;
+}
+
+.game-board-container {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.player-game-board,
+.computer-game-board {
+  font-size: 1.3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-board {
+  border: 1px solid lightgray;
+  width: 300px;
+  height: 300px;
+  min-height: auto;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.game-board-cell {
+  border: 1px solid lightgray;
+  width: auto;
+  height: auto;
+}
+
+.ship-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.carrier {
+  width: calc(30px * 5);
+  height: 30px;
+  background-color: lightgray;
+}
+
+.battleship {
+  width: calc(30px * 4);
+  height: 30px;
+  background-color: lightgray;
+}
+
+.destroyer,
+.submarine {
+  width: calc(30px * 3);
+  height: 30px;
+  background-color: lightgray;
+}
+
+.patrolBoat {
+  width: calc(30px * 2);
+  height: 30px;
+  background-color: lightgray;
+}
+
+.button-container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.button-container button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
